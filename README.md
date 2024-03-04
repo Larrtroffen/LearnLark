@@ -1,2 +1,2 @@
 # LearnLark
-An ai powered personal learning platform.
+An AI-powered personal learning platform.
