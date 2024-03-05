@@ -1,4 +1,4 @@
-# learnlark-app
+# frontend
 
 An Electron application with Vue and TypeScript
 

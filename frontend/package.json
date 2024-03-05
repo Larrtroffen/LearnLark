@@ -1,5 +1,5 @@
 {
-  "name": "learnlark-app",
+  "name": "frontend",
   "version": "1.0.0",
   "description": "An Electron application with Vue and TypeScript",
   "main": "./out/main/index.js",
@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
-    "@electron-toolkit/utils": "^3.0.0"
+    "@electron-toolkit/utils": "^3.0.0",
+    "element-plus": "^2.6.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",
