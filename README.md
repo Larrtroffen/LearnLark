@@ -1,5 +1,5 @@
 # LearnLark
-**Our team is preparing to develop an educational platform tailored to primary and secondary school students based on a large-model recommendation algorithm. The platform aims to provide comprehensive learning support and management services for students, teachers, and parents. The software is expected to integrate multiple functions, outlined as follows:
+Our team is preparing to develop an educational platform tailored to primary and secondary school students based on a large-model recommendation algorithm. The platform aims to provide comprehensive learning support and management services for students, teachers, and parents. The software is expected to integrate multiple functions, outlined as follows:
 
 (1) Personalized Course Recommendations: Based on students' learning needs, interests, and study history, the system will recommend suitable course content to help them study more effectively.
 
@@ -21,7 +21,7 @@ In terms of design features, we will focus on the following aspects:
 
 (3) Cross-Platform Support: Utilizing the Electron desktop application framework, we will enable cross-platform functionality, allowing users to seamlessly switch between different devices for learning, thereby improving learning flexibility and convenience.
 
-Through the implementation of the above functions and design features, we aim to create a comprehensive and personalized learning platform for primary and secondary school students, helping them better grasp knowledge, improve learning outcomes, and cultivate independent learning skills and lifelong learning awareness. These features will provide students with support and guidance, making their learning process easier and more enjoyable.**
+Through the implementation of the above functions and design features, we aim to create a comprehensive and personalized learning platform for primary and secondary school students, helping them better grasp knowledge, improve learning outcomes, and cultivate independent learning skills and lifelong learning awareness. These features will provide students with support and guidance, making their learning process easier and more enjoyable.
 ## Content
 
 
