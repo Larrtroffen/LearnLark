@@ -1,4 +1,4 @@
-# frontend
+# client
 
 An Electron application with Vue and TypeScript
 
