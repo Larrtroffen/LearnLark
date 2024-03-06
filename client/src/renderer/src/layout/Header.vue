@@ -4,7 +4,7 @@
 
 <template>
     <div>
-      <h1>LearnLark — 李傲团队十年精研</h1>
+      <h1>LearnLark — 吴林昊团队十年精研</h1>
     </div>
   </template>
 
