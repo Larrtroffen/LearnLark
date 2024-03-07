@@ -4,9 +4,6 @@ import managerRouter from './managerRouter'
 
 const routes: RouteRecordRaw[] = [
     // 管理端
-    managerRouter,
-    // 客户端
-    userRouter,
   ]
   
   const router = createRouter({
