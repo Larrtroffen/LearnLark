@@ -1,4 +1,16 @@
 # LearnLark
+## 开发指南
+在本地新建文件夹
+执行`git clone`
+进入项目文件夹
+`cd LearnLark\client`
+安装环境
+`npm i`
+启动开发
+`npm run dev`
+
+
+## Brief description
 Our team is preparing to develop an educational platform tailored to primary and secondary school students based on a large-model recommendation algorithm. The platform aims to provide comprehensive learning support and management services for students, teachers, and parents. The software is expected to integrate multiple functions, outlined as follows:
 
 (1) Personalized Course Recommendations: Based on students' learning needs, interests, and study history, the system will recommend suitable course content to help them study more effectively.
