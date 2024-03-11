@@ -52,4 +52,14 @@
   padding: 10px 20px;
   cursor: pointer;
 }
+.link-btn:hover {
+  color: #000;
+  background-color: #fff;
+  
+  border-bottom: 2px solid #72b0ed;
+  border-top: 2px solid #72b0ed;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
 </style>
