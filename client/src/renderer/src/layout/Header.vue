@@ -15,7 +15,7 @@
           <img class="logo" src="..\pics\logo1.png" alt="Logo">
           <div class="sep"></div>
           <el-button class="link-btn">
-            <div>记录</div>
+            <div>任务</div>
           </el-button>
           <div class="sep1"></div>
           <el-button class="link-btn">
