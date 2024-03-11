@@ -6,7 +6,7 @@
 
 <script setuo lang="ts">
 
-const axios = require('axios').default
+
 
 
 export default {
