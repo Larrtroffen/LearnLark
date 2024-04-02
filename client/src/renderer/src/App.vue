@@ -1,8 +1,7 @@
 <script setup lang="ts">
-    import Header from './layout/Header.vue';
     import Footer from './layout/Footer.vue';
-
-
+    import Header from './layout/Header.vue';
+    import Layout from './layout/Layout.vue';
 </script>
 
 <template>
@@ -11,8 +10,8 @@
       <el-header>
         <Header />
       </el-header>
-      <el-main>
-        
+      <el-main class="el-main">
+        <Layout />
       </el-main>
       <el-footer>
         <Footer />
@@ -28,7 +27,5 @@
   display: flex;
   flex-direction: column;
 }
-
-
 
 </style>
