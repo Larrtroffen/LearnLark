@@ -1,16 +1,18 @@
 # LearnLark
-## 开发指南
-在本地新建文件夹
-执行`git clone`
-进入项目文件夹
-`cd LearnLark\client`
-安装环境
-`npm i`
-启动开发
-`npm run dev`
 
+## 开发指南
+
+- 在本地新建文件夹
+- 执行`git clone`
+- 进入项目文件夹
+- `cd LearnLark\client`
+- 安装环境
+- `npm i`
+- 启动开发
+- `npm run dev`
 
 ## Brief description
+
 Our team is preparing to develop an educational platform tailored to primary and secondary school students based on a large-model recommendation algorithm. The platform aims to provide comprehensive learning support and management services for students, teachers, and parents. The software is expected to integrate multiple functions, outlined as follows:
 
 (1) Personalized Course Recommendations: Based on students' learning needs, interests, and study history, the system will recommend suitable course content to help them study more effectively.
@@ -34,8 +36,9 @@ In terms of design features, we will focus on the following aspects:
 (3) Cross-Platform Support: Utilizing the Electron desktop application framework, we will enable cross-platform functionality, allowing users to seamlessly switch between different devices for learning, thereby improving learning flexibility and convenience.
 
 Through the implementation of the above functions and design features, we aim to create a comprehensive and personalized learning platform for primary and secondary school students, helping them better grasp knowledge, improve learning outcomes, and cultivate independent learning skills and lifelong learning awareness. These features will provide students with support and guidance, making their learning process easier and more enjoyable.
+
 ## Content
 
-
 ## Structure
+
 <img width="543" alt="cb66e09d3a78efe97472f3c76c669ed" src="https://github.com/Larrtroffen/LearnLark/assets/118495925/b67cc8bf-6c9c-42b2-aee5-729cd7f611c2">
