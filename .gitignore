@@ -1,0 +1,5 @@
+client/node_modules
+client/dist
+client/out
+.DS_Store
+*.log*
