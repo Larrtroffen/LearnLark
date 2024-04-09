@@ -1,5 +1,6 @@
 # LearnLark
 
+![GitHub Repo stars](https://img.shields.io/github/stars/Larrtroffen/LearnLark)
 ![GitHub License](https://img.shields.io/github/license/Larrtroffen/LearnLark)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Larrtroffen/LearnLark)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Larrtroffen/LearnLark)
