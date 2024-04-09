@@ -1,5 +1,9 @@
 # LearnLark
 
+![GitHub License](https://img.shields.io/github/license/Larrtroffen/LearnLark)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Larrtroffen/LearnLark)
+![GitHub last commit](https://img.shields.io/github/last-commit/Larrtroffen/LearnLark)
+
 ## 前端开发指南
 
 - 在本地新建文件夹
