@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&random=false&width=435&lines=LearnLark+%E2%80%94+Make+Learning+Easier)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=40&pause=1000&random=false&width=800&height=80&lines=LearnLark+%E2%80%94+Make+Learning+Easier)](https://git.io/typing-svg)
 
 ![Github Created At](https://img.shields.io/github/created-at/Larrtroffen/LearnLark)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Larrtroffen/LearnLark)
