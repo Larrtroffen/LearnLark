@@ -8,6 +8,12 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Larrtroffen/LearnLark)
 
 
+## 仓库活动情况
+![Alt](https://repobeats.axiom.co/api/embed/a751cb753b393acf3cd58b271743bcb638687952.svg "Repobeats analytics image")
+
+
+
+
 ## 前端开发指南
 
 - 执行gitclone
