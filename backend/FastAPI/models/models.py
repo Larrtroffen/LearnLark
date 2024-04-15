@@ -29,7 +29,7 @@ class record(Base):
 
     rid = Column(Integer, primary_key=True, index=True)
     uid = Column(Integer, ForeignKey("account.uid"))
-    tid = Column(Integer, ForeignKey("questions.tid"))
+    qid = Column(Integer, ForeignKey("questions.qid"))
     time = Column(DateTime, default=datetime.datetime.utcnow)
     number = Column(Integer)
 
