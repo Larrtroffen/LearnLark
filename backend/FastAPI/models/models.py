@@ -3,20 +3,43 @@ from sqlalchemy.orm import relationship
 from core.database import Base
 import datetime
 
-class User(Base):
-    __tablename__ = "users"
+class account(Base):
+    __tablename__ = "account"
 
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+    uid = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    mail = Column(String, index=True)
+    passwd = Column(String)
 
-class Blog(Base):
-    __tablename__ = "blogs"
+class questions(Base):
+    __tablename__ = "questions"
 
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
+    tid = Column(Integer, primary_key=True, index=True)
     content = Column(String)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    author_id = Column(Integer, ForeignKey("users.id"))
+    selections_A = Column(String)
+    selections_B = Column(String)
+    selections_C = Column(String)
+    selections_D = Column(String)
+    answer = Column(String)
+    difficulty = Column(Integer)
+    question_type = Column(String)
 
-    author = relationship("User", back_populates="blogs")
+class record(Base):
+    __tablename__ = "record"
+
+    rid = Column(Integer, primary_key=True, index=True)
+    uid = Column(Integer, ForeignKey("account.uid"))
+    tid = Column(Integer, ForeignKey("questions.tid"))
+    time = Column(DateTime, default=datetime.datetime.utcnow)
+    number = Column(Integer)
+
+class mission(Base):
+    __tablename__ = "mission"
+
+    mid = Column(Integer, primary_key=True, index=True)
+    uid = Column(Integer, ForeignKey("account.uid"))
+    day_total = Column(Integer)
+    day_used = Column(Integer)
+    mission_name = Column(String)
+    mission_type = Column(String)
+    
