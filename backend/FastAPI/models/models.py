@@ -41,7 +41,7 @@ class mission(Base):
     day_total = Column(Integer)
     day_used = Column(Integer)
     mission_name = Column(String)
-    mission_type = Column(String)
+    question_type = Column(String, ForeignKey("type.question_type"))
 
 class test(Base):
     __tablename__ = "mission"
