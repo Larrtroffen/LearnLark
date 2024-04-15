@@ -72,7 +72,8 @@ pip install -r requirments.txt
 
 ## 项目结构
 
-<div align="center"><img width="543" alt="cb66e09d3a78efe97472f3c76c669ed" src="https://github.com/Larrtroffen/LearnLark/assets/118495925/b67cc8bf-6c9c-42b2-aee5-729cd7f611c2"></div>
+<div align="center"><img width="630" alt="93c70581d2ab762d2a7e59950a471ab" src="https://github.com/Larrtroffen/LearnLark/assets/118495925/bd939f99-38ad-4972-a155-bf8a8720ec73"></div>
+
 
 ## 进度记录
 
