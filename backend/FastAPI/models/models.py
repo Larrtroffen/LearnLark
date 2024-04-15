@@ -14,7 +14,7 @@ class account(Base):
 class questions(Base):
     __tablename__ = "questions"
 
-    tid = Column(Integer, primary_key=True, index=True)
+    qid = Column(Integer, primary_key=True, index=True)
     content = Column(String)
     selections_A = Column(String)
     selections_B = Column(String)
@@ -42,5 +42,14 @@ class mission(Base):
     day_used = Column(Integer)
     mission_name = Column(String)
     mission_type = Column(String)
+
+class test(Base):
+    __tablename__ = "mission"
+
+    tid = Column(Integer, primary_key=True, index=True)
+    mid = Column(Integer, ForeignKey("mission.mid"))
+    question_type = Column(String, ForeignKey("question.question_type"))
+    test_time=Column(DateTime, default=datetime.datetime.utcnow)
+    grade=Column(Integer)
     
 
