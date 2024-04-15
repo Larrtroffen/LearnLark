@@ -22,7 +22,7 @@ class questions(Base):
     selections_D = Column(String)
     answer = Column(String)
     difficulty = Column(Integer)
-    question_type = Column(String)
+    question_type = Column(String, ForeignKey("type.question_type"))
 
 class record(Base):
     __tablename__ = "record"
@@ -48,8 +48,12 @@ class test(Base):
 
     tid = Column(Integer, primary_key=True, index=True)
     mid = Column(Integer, ForeignKey("mission.mid"))
-    question_type = Column(String, ForeignKey("question.question_type"))
+    question_type = Column(String, ForeignKey("type.question_type"))
     test_time=Column(DateTime, default=datetime.datetime.utcnow)
     grade=Column(Integer)
-    
+
+class test(Base):
+    __tablename__ = "mission"
+    question_type = Column(String)
+
 
