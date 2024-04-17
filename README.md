@@ -8,6 +8,12 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Larrtroffen/LearnLark)
 
 
+## 仓库活动情况
+![Alt](https://repobeats.axiom.co/api/embed/a751cb753b393acf3cd58b271743bcb638687952.svg "Repobeats analytics image")
+
+
+
+
 ## 前端开发指南
 
 - 执行gitclone
@@ -66,9 +72,22 @@ pip install -r requirments.txt
 
 ## 项目结构
 
-<img width="543" alt="cb66e09d3a78efe97472f3c76c669ed" src="https://github.com/Larrtroffen/LearnLark/assets/118495925/b67cc8bf-6c9c-42b2-aee5-729cd7f611c2">
+<div align="center"><img width="630" alt="93c70581d2ab762d2a7e59950a471ab" src="https://github.com/Larrtroffen/LearnLark/assets/118495925/bd939f99-38ad-4972-a155-bf8a8720ec73"></div>
+
 
 ## 进度记录
+
+### 实验七
+
+#### 实验七 实验内容
+
+>1. 搜集“软件需求规格说明SRS”编写案例
+>2. 基于已积累的资料，写作自己项目的SRS草稿（大纲）。
+>3. 阅读《掌握需求过程(第3版) 》，对比其附录A和国标SRS的模板，分析有什么不同和特点。
+>选择其中必要的部分，补充进自己项目的SRS。
+>4. 参照课本及PPT上例子，练习用静态建模 (E-R、UML）等工具对所负责的系统建模，用模型model与用户沟通。
+  分析、归纳、总结出符合实际的需求规格。
+
 
 ### 实验六
 
