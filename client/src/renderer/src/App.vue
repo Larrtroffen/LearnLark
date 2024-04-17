@@ -8,13 +8,13 @@
     <div class="common-layout">
     <el-container>
       <el-header>
-        <Header />
+        <Header/>
       </el-header>
       <el-main class="el-main">
         <Layout />
       </el-main>
       <el-footer>
-        <Footer />
+        <Footer/>
       </el-footer>
     </el-container>
   </div>
