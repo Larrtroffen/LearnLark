@@ -5,12 +5,14 @@ import Learn from '@renderer/Functions/Learn.vue';
 import Mission from '@renderer/Functions/Mission.vue';
 import Test from '@renderer/Functions/Test.vue';
 import Personal from '@renderer/Functions/Personal.vue';
-const show_login = false
+import error from '@renderer/error/404.vue';
+const show_login = true
 const show_register = false
 const show_search = false
 const show_mission = false
 const show_test = false
 const show_person = true
+const show_404 = false
 </script>
 
 <template>
@@ -36,8 +38,13 @@ const show_person = true
     </div>
     <div v-if="show_person">
         <Personal>
-            </Personal>
+        </Personal>
     </div>
+    <div v-if="show_404">
+        <error>
+        </error>
+    </div>
+
 </template>
 
 <style>

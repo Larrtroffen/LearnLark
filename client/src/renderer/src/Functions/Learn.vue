@@ -15,6 +15,10 @@
         <math_result>
             </math_result>
         </div>
+        <div>
+            <videoplayer>
+                </videoplayer>
+            </div>
     <el-pagination :total="100" />
 </template>
 
@@ -25,5 +29,5 @@
 <script setup lang="ts">
 
 import math_result from '@renderer/Functions/Learn/math_result.vue';
-
+import videoplayer from './video_components/videoplayer.vue';
 </script>

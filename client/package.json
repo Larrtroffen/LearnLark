@@ -26,7 +26,9 @@
     "@element-plus/icons-vue": "^2.3.1",
     "axios": "^1.6.7",
     "element-plus": "^2.6.0",
-    "vue-router": "^4.3.0"
+    "lottie-web": "^5.12.2",
+    "vue-router": "^4.3.0",
+    "vue3-lottie": "^3.3.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

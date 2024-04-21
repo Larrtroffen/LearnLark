@@ -1,9 +1,9 @@
 <script setup lang="ts">
-    
+
 </script>
 
 <template>
-<div id="form-ui">
+  <div id="form-ui">
     <form action="" method="post" id="form">
       <div id="form-body">
         <div id="welcome-lines">
@@ -26,13 +26,13 @@
         </div>
       </div>
     </form>
-    </div>
+  </div>
 </template>
 
 <style>
 #form {
   display: grid;
-  place-items:center;
+  place-items: center;
   width: 300px;
   height: 472px;
   padding: 25px;
@@ -136,6 +136,4 @@
   font-size: 12px;
   text-decoration: none;
 }
-
-    
-    </style>
+</style>
