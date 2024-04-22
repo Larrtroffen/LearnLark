@@ -37,32 +37,35 @@ class LearnLark(object):
     def test_knwledge(self):
         pass
 
-    def generate_schedule(self,task)->dict:
+    def generate_schedule(
+            self,
+            task:str,
+            time:int,
+    )->dict:
         """
         使用LLM帮助制定计划，制定的计划需要反馈到前端并显示
         显示：时间+要干的事情（具体）
+        :param time: 完成这项任务的时间
         :param task: 需要制定的任务描述，越详细越好
         :return:制定的计划
-        结构为{{'time':  ,'task'  ,}......}
+        结构为{'第一天':  ,'第二天':  ,}
         """
-        name = ['计划']
-        descriptions = ["需要尽量的详细"]
+        name = [f"第{i+1}天" for i in range(time)]
+        name.append('总体做法')
+        descriptions = ["需要尽量的详细" for i in range(time+1)]
+
         out_parsers = Utils.create_out_parsers(name, descriptions)
 
-        prompt = ("我想完成一项任务，这是该任务的具体描述，请帮我分析并制定计划："+task
-                  +"要求：给出具体的天数同时给出每天应该做些什么")
-        template_string = "{prompt}"
-        input_variables = ['prompt']
+        template_string = """我想完成一项任务，这是该任务的具体描述，
+                          请帮我分析并制定计划：{task}，我需要在{time}天内完成
+                          要求：给出具体的天数同时给出每天应该做些什么"""
+      
+        input_variables = ['task','time']
 
         prompt = Utils.create_prompt(template_string,input_variables,
-                                     True,out_parsers,prompt=prompt)
+                                     True,out_parsers,task=task,time=time)
 
-        # print(prompt)
-        output = self.llm(prompt)
-        # print(output)
-        output = out_parsers.parse(output)
-        # print(output)
-
+        output = out_parsers.parse(self.llm(prompt))
         return output
 
 if __name__ == "__main__":
