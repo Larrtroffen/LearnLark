@@ -25,11 +25,46 @@ class LearnLark(object):
     def __init__(self):
         pass
 
-    def generate_question(self):
-        pass
+    def generate_next_question(
+            self,
+            question:str,
+            knowledge_point:str,
+            is_correct:bool
+    )->dict:
+        """
+        根据上述内容生成题目用于日常练习
+        :param question:题目
+        :param knowledge_point: 知识点
+        :param is_correct: 题目回答情况
+        :return: 更简单/难的题 + 答案 + 解析
+        结构为{'question':  ,'answer':  ,'analysis':  }
+        """
 
-    def evaluate_result(self):
-        pass
+        name = ["question", "answer", "analysis"]
+        description = ["所需要生成的与知识点有关的题目",
+                       "题目的答案，简短直接",
+                       "题目的解析，较为详细，一步步解决问题"]
+        out_parsers = Utils.create_out_parsers(name, description)
+
+        input_variables = ['knowledge_point','question']
+
+        instruction = "本次我学习的是以下知识点：{knowledge_point}，我已经答了这道题：{question}，"
+        if is_correct:
+            instruction = instruction + "并且答对了，请为我生成一道与该知识点相关，并且更难的题目与解析"
+        else:
+            instruction = instruction + "并且答错了，请为我生成一道与该知识点相关，难度与原题目类似的题目与解析"
+
+        prompt = Utils.create_prompt(template_string=instruction,
+                                     input_variables=input_variables,
+                                     out_parser=out_parsers,
+                                     is_output_format=True,
+                                     question=question,
+                                     knowledge_point=knowledge_point
+                                     )
+
+        output = self.llm(prompt)
+
+        return out_parsers.parse(output)
 
     def study_knowledge(self):
         pass
