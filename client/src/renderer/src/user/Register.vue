@@ -33,7 +33,7 @@
     display: grid;
     place-items: center;
     width: 300px;
-    height: auto;
+    height: 472px;
     padding: 25px;
     background-color: #ffffffcb;
     box-shadow: 0px 15px 60px #55ACEE;

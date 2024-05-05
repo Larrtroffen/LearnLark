@@ -1,49 +1,30 @@
 <script setup lang="ts">
-import Login from '@renderer/user/Login.vue';
-import Register from '@renderer/user/Register.vue';
-import Learn from '@renderer/Functions/Learn.vue';
-import Mission from '@renderer/Functions/Mission.vue';
 import Test from '@renderer/Functions/Test.vue';
 import Personal from '@renderer/Functions/Personal.vue';
-import error from '@renderer/error/404.vue';
-const show_login = true
-const show_register = false
-const show_search = false
-const show_mission = false
-const show_test = false
-const show_person = true
-const show_404 = false
+import Mission_ini from '@renderer/Functions/Mission_ini.vue';
+import Learn from '@renderer/Functions/Learn.vue';
+import Login from '@renderer/user/Login.vue';
 </script>
 
 <template>
-    <div v-if="show_login" class="login-style">
-        <Login>
-        </Login>
-    </div>
-    <div v-if="show_register">
-        <Register>
-        </Register>
-    </div>
-    <div v-if="show_search">
-        <Learn>
-        </Learn>
-    </div>
-    <div v-if="show_mission">
-        <Mission>
-        </Mission>
-    </div>
-    <div v-if="show_test">
+    <div>
         <Test>
         </Test>
     </div>
-    <div v-if="show_person">
+    <div>
         <Personal>
         </Personal>
     </div>
-    <div v-if="show_404">
-        <error>
-        </error>
+    <div>
+        <Mission_ini>
+        </Mission_ini>
     </div>
+    <div>
+        <Learn>
+        </Learn>
+    </div>
+    <Login>
+        </Login>
 
 </template>
 
