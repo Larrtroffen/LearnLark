@@ -2,30 +2,30 @@
 import Test from '@renderer/Functions/Test.vue';
 import Personal from '@renderer/Functions/Personal.vue';
 import Mission_ini from '@renderer/Functions/Mission_ini.vue';
-import Learn from '@renderer/Functions/Learn.vue';
 import Login from '@renderer/user/Login.vue';
+import Register from '@renderer/user/Register.vue';
+import learing from '@renderer/Functions/Learn.vue'
 </script>
 
 <template>
-    <div>
+   <div>
         <Test>
         </Test>
-    </div>
-    <div>
         <Personal>
-        </Personal>
-    </div>
-    <div>
-        <Mission_ini>
-        </Mission_ini>
-    </div>
-    <div>
-        <Learn>
-        </Learn>
-    </div>
-    <Login>
-        </Login>
+            </Personal>
+            <Mission_ini>
+                </Mission_ini>
+                <Login>
+                    </Login>
+                    <Register>
+                        </Register>
 
+    </div>
+
+<div>
+<learing>
+    </learing>
+    </div>
 </template>
 
 <style>
