@@ -77,6 +77,19 @@ pip install -r requirments.txt
 
 ## 进度记录
 
+### 实验十
+
+#### 实验十 实验内容
+
+>1. 对比书上各种软件体系结构风格和视图特点，思考自己项目属于哪种设计风格？
+网上搜索最新的软件体系结构资料，如MVC、Kruchten 4+1视图等。
+>2. 参阅课本和网上资料，研究经典软件体系结构案例KWIC。
+   An Introduction to Software Architecture，4.1节
+   On-the-Criteria-To-Be-Used-in-Decomposing-Systems-into-Modules（Example System 1）
+   http://www.cs.cmu.edu/~ModProb/index.html
+   针对KWIC和自己项目，参考课本ch5 表5-3，小组成员每人给几种不同的体系结构风格设计打分，评最佳。
+>3. 补充和修改自己项目的SAD
+
 ### 实验九
 
 #### 实验九 实验内容
