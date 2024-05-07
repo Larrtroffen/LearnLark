@@ -62,7 +62,7 @@ const calculateStudyDays = () => { };
 }
 
 .banner {
-  background: linear-gradient(to bottom, #6bd3f3, #00c5ec);
+  background: linear-gradient(to bottom, #98def3, #1ccef2);
   color: white;
   padding: 20px;
   text-align: center;
@@ -100,7 +100,7 @@ const calculateStudyDays = () => { };
 }
 
 .banner {
-  background: linear-gradient(to bottom, #6bd3f3, #00c5ec);
+  background: linear-gradient(to bottom, #c4f1ff, #7ed2f2, #1ccef2); 
   color: white;
   padding: 20px;
   text-align: center;

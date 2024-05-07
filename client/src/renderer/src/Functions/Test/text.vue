@@ -15,10 +15,14 @@
   </script>
   
   <style scoped>
+  .el-text{
+    font-size: 24px;
+    font-weight: bold;
+  }
   .inputGroup {
     font-family: 'Segoe UI', sans-serif;
     margin: 1em 0 1em 0;
-    max-width: 250px; /* Increased maximum width */
+    max-width: 450px; /* Increased maximum width */
     position: relative;
   }
   

@@ -1,29 +1,26 @@
 <template>
     <div>
-
-        <div>
-            <el-text>题目</el-text>
+        <div class="question-section">
+            <el-text class="question-text">下列哪个城市被誉为“水城”？</el-text>
         </div>
         <div class="radio-buttons">
             <label class="radio-button">
                 <input type="radio" name="option" value="option1">
                 <div class="radio-circle"></div>
-                <el-text class="radio-label">选项A&nbsp;</el-text><el-text class="content_text">题目内容</el-text>
+                <el-text class="radio-label">A. 威尼斯</el-text>
             </label>
             <label class="radio-button">
                 <input type="radio" name="option" value="option2">
                 <div class="radio-circle"></div>
-                <el-text class="radio-label">选项B&nbsp;</el-text><el-text class="content_text">题目内容</el-text>
+                <el-text class="radio-label">B. 巴黎</el-text>
             </label>
             <label class="radio-button">
                 <input type="radio" name="option" value="option3">
                 <div class="radio-circle"></div>
-                <el-text class="radio-label">选项C&nbsp;</el-text><el-text class="content_text">题目内容</el-text>
+                <el-text class="radio-label">C. 纽约</el-text>
             </label>
         </div>
     </div>
-
-
 </template>
 
 <script setup lang="ts">
@@ -34,8 +31,24 @@ const selectedOption = ref<string>('');
 </script>
 
 <style scoped>
+.question-section {
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.radio-label {
+    font-size: 16px;
+    margin-left: 10px; /* 为选项字母和内容之间增加一些空间 */
+}
+
+
 .radio-buttons {
     display: flex;
+    gap: 15px;
     flex-direction: column;
     color: white;
 }
@@ -43,6 +56,7 @@ const selectedOption = ref<string>('');
 .radio-button {
     display: flex;
     align-items: center;
+    align-items: start;
     margin-bottom: 10px;
     cursor: pointer;
 }

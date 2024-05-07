@@ -1,41 +1,3 @@
-<template>
-  <div id="app">
-    <div class="timer">
-      <div class="cir_per">
-        <el-progress type="circle" :percentage="percentage" :color="progressColor" />
-      </div>
-      <div class="time_text"> <span>{{ timeText }}</span>
-      </div>
-    </div>
-    <h1>测试</h1>
-
-    <!-- 单选题 -->
-    <div>
-
-      <div class="container">
-        <el-text class="title">单选题</el-text>
-      </div>
-      <radio>
-      </radio>
-    </div>
-    <!-- 多选题 -->
-    <div>
-      <el-text class="title">多选题</el-text>
-      <checkbox>
-      </checkbox>
-    </div>
-    <!-- 简答题 -->
-    <div>
-      <el-text class="title">简答题</el-text>
-      <jianda>
-      </jianda>
-    </div>
-
-    <!-- 提交按钮 -->
-    <el-button class="button">提交</el-button>
-  </div>
-</template>
-
 <script setup lang="ts">
 import radio from '@renderer/Functions/Test/radio.vue'
 import checkbox from '@renderer/Functions/Test/checkbox.vue'
@@ -43,7 +5,7 @@ import jianda from '@renderer/Functions/Test/text.vue'
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 // 倒计时的总时长（15分钟）
-const totalSeconds = 20
+const totalSeconds = 1000
 const remainingSeconds = ref(totalSeconds)
 // 初始化倒计时进度为100%
 const percentage = ref(100)
@@ -98,43 +60,117 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
-.title {
-  font-size: 24px;
+
+
+<template>
+  <div id="app" class="app-container">
+    <div class="timer-wrapper">
+      <div class="cir_per">
+        <el-progress type="circle" :percentage="percentage" :color="progressColor" />
+      </div>
+      <div class="time_text"><span>{{ timeText }}</span></div>
+    </div>
+    <div class="content-section">
+      <h1 class="test-title">测试</h1>
+      <div class="question-section">
+        <section>
+          <h2 class="question-type">单选题</h2>
+          <radio />
+        </section>
+        <section>
+          <h2 class="question-type">多选题</h2>
+          <checkbox />
+        </section>
+        <section>
+          <h2 class="question-type">简答题</h2>
+          <jianda />
+        </section>
+      </div>
+    </div>
+    <el-button class="submit-button">提交</el-button>
+  </div>
+</template>
+
+<style>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 30px;
+  background-color: #ffffff;
 }
 
-.button {
+.timer-wrapper {
+  position: fixed;
+  top: 10%;
+  /* 调整计时器距离顶部的距离 */
+  right: 15px;
+  /* 计时器距离右侧的距离 */
+  width: 150px;
+  /* 可以根据需要调整计时器的大小 */
+  height: auto;
+  /* 自动调整高度以适应内容 */
+  z-index: 1000;
+  /* 确保计时器在其他内容之上 */
+  width: 200px;
+  height: 200px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 垂直居中对齐 */
+  justify-content: center; /* 水平居中对齐 */
+}
+
+.time_text {
+  font-size: 18px;
+  color: #55ACEE;
+  display: flex;
+}
+
+.content-section {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 40px;
+}
+
+.test-title {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.question-type {
+  font-size: 24px;
+  color: #55ACEE;
+  margin-bottom: 15px;
+}
+
+.submit-button {
   position: relative;
   display: inline-block;
-  margin: 15px;
+  margin-top: 50px;
   padding: 15px 30px;
-  text-align: center;
   font-size: 18px;
   letter-spacing: 1px;
   text-decoration: none;
   line-height: 0.3;
-  color: #55ACEE;
-  background: transparent;
+  color: #fff;
+  background-color: #55ACEE;
   cursor: pointer;
-  transition: ease-out 0.5s;
-  border: 2px solid #55ACEE;
+  transition: all 0.3s ease;
+  border: none;
   border-radius: 10px;
-  box-shadow: inset 0 0 0 0 #55ACEE;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.button:hover {
-  color: white;
-  box-shadow: inset 0 -100px 0 0 #55ACEE;
+.submit-button:hover {
+  background-color: #4ab3f4;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-.button:active {
-  transform: scale(0.9);
-}
-
-.timer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.submit-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

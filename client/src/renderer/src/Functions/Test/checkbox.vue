@@ -2,50 +2,75 @@
 <template>
   <el-form>
     <el-form-item>
-      <h3>Question Title Here</h3>
-      <el-checkbox-group v-model="checkedOptions">
-        <el-checkbox
-          v-for="(option, index) in options"
-          :key="index"
-          :label="option.value"
-          :class="{ 'animate-option': true, 'selected': option.value in checkedOptions }"
-          @change="handleCheckboxChange"
-        >
-          {{ option.text }}
-        </el-checkbox>
-      </el-checkbox-group>
+      <div class="question-container">
+        <el-form-item>
+          <span class="question-text">Which city is known as the "City of Water"?</span>
+        </el-form-item>
+        <el-checkbox-group v-model="checkedOptions" class="options-container">
+          <el-checkbox
+            v-for="(option, index) in options"
+            :key="index"
+            :label="option.value"
+            :class="{ 'animate-option': true, 'selected': option.value in checkedOptions }"
+            @change="handleCheckboxChange"
+          >
+          <div class="option-content">
+              <span class="option-value">{{ option.value }}</span>
+              <span>{{ option.text }} </span>
+1           </div>
+          </el-checkbox>
+        </el-checkbox-group>
+      </div>
     </el-form-item>
   </el-form>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-
-const checkedOptions = ref([]);
-const options = [
-  { value: 'option1', text: 'Option 1' },
-  { value: 'option2', text: 'Option 2' },
-  { value: 'option3', text: 'Option 3' },
-];
-
-const handleCheckboxChange = (value) => {
-  // 可以在这里处理选项变化的逻辑
-};
-</script>
-
 <style scoped>
-::v-deep(.el-checkbox__inner) { /* 修改选择器以针对复选框内部元素 */
-  /* 隐藏Element Plus默认的复选框图标 */
+.question-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.question-text {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.option-value {
+  font-weight: bold;
+  color: #6871f1;
+}
+.option-content {
+  display: flex;
+  align-items: baseline; /* 使得文字基线对齐 */
+  gap: 5px; /* 选项值和文本之间的间距 */
+}
+.options-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap; /* 允许选项换行 */
+  gap: 30px 30px; /* 增加选项间的水平和垂直间距 */
+}
+::v-deep(.el-checkbox__label) {
+  flex: 1;
+  white-space: normal;
+  font-size: 16px;
+  word-break: break-word; 
+}
+
+::v-deep(.el-checkbox__inner) { 
   display: none;
 }
+
 ::v-deep(.el-checkbox__input) {
+  display: block;
   position: relative;
   top: 1px;
   width: 27px;
   height: 27px;
   border: 1px solid #c8ccd4;
   border-radius: 3px;
-  vertical-align: middle;
   transition: background 0.1s ease;
   cursor: pointer;
   display: block;
@@ -67,8 +92,6 @@ const handleCheckboxChange = (value) => {
   transition-delay: 0.15s;
 }
 
-/* 由于Element Plus组件结构，直接应用.checked可能不适用，
-   需要查看实际DOM结构以找到正确的方式标记选中状态 */
 ::v-deep(.is-checked .el-checkbox__input) {
   border-color: transparent;
   background: #6871f1;
@@ -111,5 +134,19 @@ const handleCheckboxChange = (value) => {
 .hidden-xs-up {
   display: none!important;
 }
-
 </style>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const checkedOptions = ref([]);
+const options = [
+  { value: 'A', text: '11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111' },
+  { value: 'B', text: '' },
+  { value: 'C', text: '' },
+];
+
+const handleCheckboxChange = (value) => {
+  // 可以在这里处理选项变化的逻辑
+};
+</script>
