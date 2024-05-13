@@ -174,14 +174,15 @@ class LearnLark(object):
 
 if __name__ == "__main__":
 
-    print(LearnLark().generate_next_question("已知双曲函数sinh(x) = (e^x - e^-x)/2，"
-                                             "求cosh(x)的导函数","圆锥曲线",True))
-    print("--------------------------------------------------")
+    # print(LearnLark().generate_next_question("已知双曲函数sinh(x) = (e^x - e^-x)/2，"
+    #                                          "求cosh(x)的导函数","圆锥曲线",True))
+    # print("--------------------------------------------------")
   
-    print(LearnLark().study_knowledge("三角函数"))
-    print("--------------------------------------------------")
+    # print(LearnLark().study_knowledge("三角函数"))
+    # print("--------------------------------------------------")
   
-    print(LearnLark().test_knowledge({"三角函数":[3,5],"圆锥曲线":[4,10]}))
-    print("--------------------------------------------------")
+    # print(LearnLark().test_knowledge({"三角函数":[3,5],"圆锥曲线":[4,10]}))
+    # print("--------------------------------------------------")
   
-    print(LearnLark().generate_schedule("我想背完3500词",40))
+    # print(LearnLark().generate_schedule("我想背完3500词",40))
+    pass
