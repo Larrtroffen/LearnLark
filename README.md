@@ -77,6 +77,17 @@ pip install -r requirments.txt
 
 ## 进度记录
 
+### 实验十二
+
+#### 实验十二 实验内容
+
+>1. 参考教材6.2，结合项目的进程和开发历程，从设计原则的几个方面，组员对负责设计的模块进行评估，思考存在的问题和解决方案。
+
+>2. 阅读下面DI资料（或查阅其它相关资料），学习依赖注入技术。
+Dependency injection - Wikipedia
+Dependency Injection-A Practical Introduction.pdf
+
+
 ### 实验十一
 
 #### 实验十一 实验内容
