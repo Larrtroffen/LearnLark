@@ -71,9 +71,9 @@ class Utils(object):
     3.支持四种类型的对话Memory，便于进行长对话理解
     4.支持设置LLM chain，通过路由选择更好的prompt辅助生成
     5.支持基础agent设置
-    6.支持基于文档的QA，包含PDF,md,csv,docx,txt文档（对目录数据库还有部分类型不支持）
+    6.支持基于文档的QA，包含PDF,md,csv,docx,txt文档
     7.支持使用Google Search联网辅助LLM
-    8.支持构建本地llm Models完成任务（由于模型参数文件过大，暂时无法测试）
+    8.支持构建本地llm Models完成任务
     9.支持通过目录建立临时或本地数据库Indexes
 
     by XinYiLea
