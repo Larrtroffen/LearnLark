@@ -1,38 +1,23 @@
-
 <template>
   <div id="form-ui" class="registration-form">
-    <el-form
-      ref="form"
-      :model="form"
-      :rules="rules"
-      label-width="0"
-      class="demo-ruleForm"
-    >
+    <el-form ref="form" :model="form" :rules="rules" label-width="0" class="demo-ruleForm">
       <h2 class="welcome-line-1">LearnLark</h2>
       <p class="welcome-line-2">开始你的学习之旅！</p>
-      
+      <div class="input-form">
       <el-form-item prop="email">
         <el-input v-model="form.email" placeholder="邮箱地址"></el-input>
       </el-form-item>
-      
       <el-form-item prop="password">
         <el-input v-model="form.password" type="password" placeholder="密码"></el-input>
       </el-form-item>
-      
       <el-form-item prop="confirmPassword">
         <el-input v-model="form.confirmPassword" type="password" placeholder="确认密码"></el-input>
       </el-form-item>
-      
       <el-form-item>
-        <el-button
-          type="primary"
-          id="submit-button"
-          native-type="submit"
-          :loading="loading"
-          @click.prevent="onSubmit"
-        >注册</el-button>
+        <el-button type="primary" id="submit-button" native-type="submit" :loading="loading"
+          @click.prevent="onSubmit">注册</el-button>
       </el-form-item>
-      
+      </div>
       <div class="forgot-pass">
         <span>已有账号？<router-link to="/login">点击登录</router-link></span>
       </div>
@@ -105,7 +90,8 @@ onMounted(() => {
 
 .el-form-item {
   display: flex;
-  align-items: center; /* 水平居中 */
+  align-items: center;
+  /* 水平居中 */
   flex-direction: column;
   justify-content: center;
 }
@@ -135,7 +121,8 @@ onMounted(() => {
   background-color: #55ACEE;
   color: #161616;
 }
-.forgot-pass{
+
+.forgot-pass {
   text-align: center;
 }
 </style>

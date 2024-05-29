@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import radio from '@renderer/Functions/Test/radio.vue'
-import checkbox from '@renderer/Functions/Test/checkbox.vue'
-import jianda from '@renderer/Functions/Test/text.vue'
+import radio from '@renderer/components/Test/radio.vue';
+import radio1 from '@renderer/components/Test/radio1.vue';
+import radio2 from '@renderer/components/Test/radio2.vue';
+
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 // 倒计时的总时长（15分钟）
@@ -73,18 +74,8 @@ onUnmounted(() => {
     <div class="content-section">
       <h1 class="test-title">测试</h1>
       <div class="question-section">
-        <section>
           <h2 class="question-type">单选题</h2>
-          <radio />
-        </section>
-        <section>
-          <h2 class="question-type">多选题</h2>
-          <checkbox />
-        </section>
-        <section>
-          <h2 class="question-type">简答题</h2>
-          <jianda />
-        </section>
+          <radio/>
       </div>
     </div>
     <el-button class="submit-button">提交</el-button>
@@ -103,7 +94,7 @@ onUnmounted(() => {
 
 .timer-wrapper {
   position: fixed;
-  top: 10%;
+  top: 5%;
   /* 调整计时器距离顶部的距离 */
   right: 15px;
   /* 计时器距离右侧的距离 */
@@ -113,14 +104,14 @@ onUnmounted(() => {
   /* 自动调整高度以适应内容 */
   z-index: 1000;
   /* 确保计时器在其他内容之上 */
-  width: 200px;
-  height: 200px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: center; /* 垂直居中对齐 */
   justify-content: center; /* 水平居中对齐 */
+  transform: scale(0.7); /* 数值小于1会缩小，根据需要调整 */
 }
+
 
 .time_text {
   font-size: 18px;

@@ -1,37 +1,15 @@
 <script setup lang="ts">
-import Test from '@renderer/Functions/Test.vue';
-import Personal from '@renderer/Functions/Personal.vue';
-import Mission_ini from '@renderer/Functions/Mission_ini.vue';
-import Login from '@renderer/user/Login.vue';
-import Register from '@renderer/user/Register.vue';
-import learing from '@renderer/Functions/Learn.vue'
+import Learn from '@renderer/components/views/Learn.vue';
+import Test from '@renderer/components/views/Test.vue';
+import Mission_ini from '@renderer/components/views/Mission_ini.vue';
+import Personal from '@renderer/components/views/Personal.vue';
 </script>
 
 <template>
-   <div>
-        <Test>
-        </Test>
-        <Personal>
-            </Personal>
-            <Mission_ini>
-                </Mission_ini>
-                <Login>
-                    </Login>
-                    <Register>
-                        </Register>
-
-    </div>
-
-<div>
-<learing>
-    </learing>
-    </div>
+<Learn/>
+<Test/>
+<Mission_ini/>
+<Personal/>
 </template>
 
-<style>
-.login-style {
-    display: grid;
-    place-items: center;
-    margin-top: 30px;
-}
-</style>
+<style></style>
