@@ -3,6 +3,7 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     isAuthenticated: false,  // 用户是否已登录的状态
+    userEmail: ''  // 用户邮箱
   },
   mutations: {
     login(state) {
@@ -10,11 +11,16 @@ export default createStore({
     },
     logout(state) {
       state.isAuthenticated = false;
+      state.userEmail = '';  // 注销时清除邮箱
     },
+    setUserEmail(state, email: string) {
+      state.userEmail = email;
+    }
   },
   actions: {
-    login({ commit }) {
+    login({ commit }, email: string) {
       commit('login');
+      commit('setUserEmail', email);  // 登录时设置邮箱
     },
     logout({ commit }) {
       commit('logout');
@@ -22,5 +28,6 @@ export default createStore({
   },
   getters: {
     isAuthenticated: (state) => state.isAuthenticated,
+    userEmail: (state) => state.userEmail,
   },
 });

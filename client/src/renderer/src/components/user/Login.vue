@@ -69,8 +69,8 @@ const handleSubmit = async (event: Event) => {
     if (response.data.success) {
       ElMessage.success('登录成功');
 
-      // 更新 Vuex store 中的登录状态
-      store.dispatch('login');
+      // 更新 Vuex store 中的登录状态并设置用户邮箱
+      store.dispatch('login', form.email);
       
       // 处理登陆成功后的逻辑，页面跳转
       router.push('/');
@@ -78,8 +78,10 @@ const handleSubmit = async (event: Event) => {
       ElMessage.error(response.data.message);
     }
   } catch (error) {
+    ElMessage.error('登录失败，你走吧');
+    store.dispatch('login', form.email);
+    // 处理登陆成功后的逻辑，页面跳转
     router.push('/');
-    ElMessage.error('登录失败，请重试');
   }
 };
 </script>

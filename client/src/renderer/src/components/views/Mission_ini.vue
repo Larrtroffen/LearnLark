@@ -8,20 +8,26 @@
       <el-form class="form-container">
         <el-form-item label="学习天数">
           <i class="el-icon-date"></i>
-          <el-input type="number" placeholder="输入天数" />
+          <el-input type="number" v-model="studyDays" placeholder="天数总计" disabled />
           <el-date-picker class="custom-datepicker" v-model="studyDateRange" type="daterange" start-placeholder="开始日期"
             end-placeholder="结束日期" @change="calculateStudyDays" />
         </el-form-item>
         <el-form-item label="任务名称">
-          <el-input placeholder="输入任务名称" />
+          <el-input v-model="taskName" placeholder="输入任务名称" />
         </el-form-item>
         <el-form-item label="题目类型">
-          <el-select placeholder="请选择题目类型">
-            <el-option label="选择类型" value="type"></el-option>
+          <el-select v-model="selectedQuestionType" placeholder="请选择题目类型">
+            <el-option
+              v-for="type in questionTypes"
+              :key="type.value"
+              :label="type.label"
+              :value="type.value">
+
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">保存任务</el-button>
+          <el-button type="primary" @click="saveTask">保存任务</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -30,16 +36,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useStore } from 'vuex';
 
 interface DateRange {
   start: Date;
   end: Date;
 }
 
-const studyDays = ref<string | null>(null);
-const studyDateRange = ref<DateRange[]>([]);
-const calculateStudyDays = () => { };
+const store = useStore();
+const studyDays = ref<number | null>(null);
+const studyDateRange = ref<DateRange | null>(null);
+const taskName = ref('');
+const selectedQuestionType = ref('');
+const questionTypes = ref<Array<{ label: string, value: string }>>([]);
+
+const calculateStudyDays = () => {
+  if (studyDateRange.value && studyDateRange.value.length === 2) {
+    const [start, end] = studyDateRange.value;
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const differenceInTime = endDate.getTime() - startDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    studyDays.value = differenceInDays + 1; // Include the start day
+  } else {
+    studyDays.value = null;
+  }
+};
+
+const fetchQuestionTypes = async () => {
+  try {
+    const response = await axios.get('/localhost/api/question_type');
+    if (response.data) {
+      questionTypes.value = response.data.map((type: any) => ({
+        label: type.name,
+        value: type.id
+      }));
+    }
+  } catch (error) {
+    console.error('Error fetching question types:', error);
+  }
+};
+
+const saveTask = async () => {
+  const payload = {
+    days: studyDays.value,
+    startDate: studyDateRange.value ? studyDateRange.value[0] : null,
+    taskName: taskName.value,
+    questionType: selectedQuestionType.value,
+    userEmail: store.getters.userEmail // 包含用户邮箱
+  };
+
+  try {
+    await axios.post('/localhost/api/mission_save', payload);
+    alert('保存成功');
+  } catch (error) {
+    alert('保存失败');
+  }
+};
+
+onMounted(fetchQuestionTypes);
 </script>
 
 <style scoped>
