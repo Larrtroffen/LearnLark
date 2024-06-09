@@ -39,18 +39,52 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { ElForm, ElInput, ElButton } from 'element-plus';
+import axios from 'axios';
+import { ElMessage } from 'element-plus';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore(); // 引入 Vuex store
+const router = useRouter(); // 引入 Vue Router
 
 const form = reactive({
   email: '',
   password: ''
 });
 
-const handleSubmit = (event: Event) => {
+const handleSubmit = async (event: Event) => {
   event.preventDefault();
-  // 登录逻辑处理
+  
+  if (!form.email || !form.password) {
+    ElMessage.error('请输入邮箱和密码');
+    return;
+  }
+
+  try {
+    const response = await axios.post('http://localhost/api/login', {
+      email: form.email,
+      password: form.password
+    });
+
+    if (response.data.success) {
+      ElMessage.success('登录成功');
+
+      // 更新 Vuex store 中的登录状态
+      store.dispatch('login');
+      
+      // 处理登陆成功后的逻辑，页面跳转
+      router.push('/home');
+    } else {
+      ElMessage.error(response.data.message);
+    }
+  } catch (error) {
+    router.push('/home');
+    ElMessage.error('登录失败，请重试');
+  }
 };
 </script>
+
+
 
 <style scoped>
 #form-ui {

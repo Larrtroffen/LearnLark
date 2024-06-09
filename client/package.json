@@ -29,7 +29,8 @@
     "element-plus": "^2.6.0",
     "lottie-web": "^5.12.2",
     "vue-router": "^4.3.0",
-    "vue3-lottie": "^3.3.0"
+    "vue3-lottie": "^3.3.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

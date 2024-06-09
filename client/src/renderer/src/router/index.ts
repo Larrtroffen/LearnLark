@@ -13,6 +13,7 @@ import Test from '@renderer/components/views/Test.vue'
 import Footer from '@renderer/layout/Footer.vue'
 import Header from '@renderer/layout/Header.vue'
 import Layout from '@renderer/layout/Layout.vue'
+import Home from '@renderer/layout/Home.vue'
 
 // Define routes
 const routes = [
@@ -24,16 +25,17 @@ const routes = [
   { path: '/learn', component: Learn},
   { path: '/missionini', component: MissionIni},
   { path: '/personal', component: Personal},
-  { pate: '/test', component: Test},
-  { pate: '/layout', component: Layout},
-  { pate: '/footer', component: Footer},
-  { pate: '/header', component: Header},
+  { path: '/test', component: Test},
+  { path: '/layout', component: Layout},
+  { path: '/footer', component: Footer},
+  { path: '/header', component: Header},
+  { path: '/home', component: Home}
 ]
 
 // Create router instance
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 })
 
 export default router

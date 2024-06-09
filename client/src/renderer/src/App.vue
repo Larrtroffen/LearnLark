@@ -1,21 +1,28 @@
 <script setup lang="ts">
-  import Header from './layout/Header.vue';
-  import Footer from './layout/Footer.vue';
-  import Layout from './layout/Layout.vue';
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
+import router from './router';
+
+// 获取 store 实例
+const store = useStore();
+
+onMounted(() => {
+  if (store.getters.isAuthenticated) {
+    // 如果用户已登录，则跳转到/home
+    router.push('/home');
+  } else {
+    // 如果用户未登录，则跳转到/login
+    router.push('/login');
+  }
+});
 </script>
 
 <template>
-    <div class="common-layout">
+  <div class="common-layout">
     <el-container>
-      <el-header>
-        <Header/>
-      </el-header>
-      <el-main class="el-main">
-        <Layout />
+      <el-main>
+        <RouterView />
       </el-main>
-      <el-footer>
-        <Footer/>
-      </el-footer>
     </el-container>
   </div>
 </template>
@@ -27,5 +34,4 @@
   display: flex;
   flex-direction: column;
 }
-
 </style>

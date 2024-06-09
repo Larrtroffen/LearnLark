@@ -8,7 +8,7 @@
       <div>测试</div>
     </el-button>
     <div class="sep"></div>
-    <img class="logo" src="..\pics\logo1.png" alt="Logo" />
+    <img class="logo" src="../components/pics/logo1.png" alt="Logo" />
     <div class="sep"></div>
     <el-button class="link-btn" @="toTask">
       <div>任务</div>
