@@ -1,79 +1,95 @@
 <template>
-    <div class="container">
-      <div class="profile-section">
-        <div class="avatar">
-          <img src="../pics/tem.jpg" alt="Avatar" />
+  <div class="container">
+    <div class="profile-section">
+      <div class="avatar">
+        <img src="../pics/tem.jpg" alt="Avatar" />
+      </div>
+      <div class="profile-info">
+        <div class="name-section">
+          <span>个人信息</span>
+          <el-button type="text" icon="el-icon-edit" @click="editProfile">编辑</el-button>
         </div>
-        <div class="profile-info">
-          <div class="name-section">
-            <span>个人信息</span>
-            <el-button type="text" icon="el-icon-edit" @click="editProfile">编辑</el-button>
-          </div>
-          <div class="details">
-            <div class="detail-row">
-              <div class="detail-icon">
-                <img src="../pics/cat2.png" alt="Icon" />
-              </div>
-              <div class="detail-text">
-                <span v-if="!editing">{{ name }}</span>
-                <el-input v-else v-model="name" placeholder="输入姓名"></el-input>
-              </div>
+        <div class="details">
+          <div class="detail-row">
+            <div class="detail-icon">
+              <img src="../pics/cat2.png" alt="Icon" />
             </div>
-            <div class="detail-row">
-              <div class="detail-icon">
-                <img src="../pics/dian.png" alt="Icon" />
-              </div>
-              <div class="detail-text">
-                <span v-if="!editing">{{ birthday }}</span>
-                <el-date-picker v-else v-model="birthday" placeholder="选择生日"></el-date-picker>
-              </div>
+            <div class="detail-text">
+              <span v-if="!editing">{{ name }}</span>
+              <el-input v-else v-model="name" placeholder="输入姓名"></el-input>
             </div>
-            <el-button v-if="editing" type="primary" @click="saveProfile">保存</el-button>
           </div>
-        </div>
-        <div class="cat">
-          <Vue3Lottie width="200px" height="200px" :animation-data="cat_json" />
+          <el-button v-if="editing" type="primary" @click="saveProfile">保存</el-button>
         </div>
       </div>
-      <div class="history">
-        <div slot="header">
-          <span>个人中心</span>
-        </div>
-        <div class="body">
-          <el-collapse class="menu">
-            <el-collapse-item class="menu-item" title="未完成">
-              <p v-for="record in jilu" :key="record" class="infinite-list-item">{{ record }}</p>
-            </el-collapse-item>
-            <el-collapse-item class="menu-item" title="已完成">
-              <p v-for="record in jilu" :key="record" class="infinite-list-item">{{ record }}</p>
-            </el-collapse-item>
-          </el-collapse>
-        </div>
-        <el-dialog></el-dialog>
+      <div class="cat">
+        <Vue3Lottie width="200px" height="200px" :animation-data="cat_json" />
       </div>
     </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref } from 'vue';
-  import Vue3Lottie from 'vue3-lottie';
-  import cat_json from '@renderer/components/pics/cat2.json';
-  
-  const jilu = ["学习了一次", "学习了两次", "学习了三次", "学习了四次", "学习了一次", "学习了两次", "学习了三次", "学习了四次"];
-  
-  const name = ref('张三');
-  const birthday = ref('');
-  const editing = ref(false);
-  
-  const editProfile = () => {
-    editing.value = true;
-  };
-  
-  const saveProfile = () => {
+    <div class="history">
+      <div slot="header">
+        <span>个人中心</span>
+      </div>
+      <div class="body">
+        <el-collapse class="menu">
+          <el-collapse-item class="menu-item" title="未完成">
+            <p v-for="record in incomplete" :key="record" class="infinite-list-item">{{ record }}</p>
+          </el-collapse-item>
+          <el-collapse-item class="menu-item" title="已完成">
+            <p v-for="record in complete" :key="record" class="infinite-list-item">{{ record }}</p>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+      <el-dialog></el-dialog>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useStore } from 'vuex';
+import Vue3Lottie from 'vue3-lottie';
+import cat_json from '@renderer/components/pics/cat2.json';
+
+const store = useStore();
+const name = ref('');
+const complete = ref([]);
+const incomplete = ref([]);
+const editing = ref(false);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost/api/get_profile', {
+      params: { userEmail: store.state.userEmail }
+    });
+    const { record, name: userName } = response.data;
+    complete.value = record.complete;
+    incomplete.value = record.incomplete;
+    name.value = userName;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+  }
+});
+
+const editProfile = () => {
+  editing.value = true;
+};
+
+const saveProfile = async () => {
+  try {
+    await axios.post('http://localhost/api/profile_change', {
+      userEmail: store.state.userEmail,
+      name: name.value
+    });
     editing.value = false;
-    // Save the profile information here
-  };
-  </script>
+    alert('信息上传成功');
+  } catch (error) {
+    console.error('信息上传错误', error);
+    alert('信息上传错误');
+  }
+};
+</script>
   
   <style scoped>
   :root {

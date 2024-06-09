@@ -1,12 +1,71 @@
 <script setup lang="ts">
-import radio from '@renderer/components/Test/radio.vue';
-import radio1 from '@renderer/components/Test/radio1.vue';
-import radio2 from '@renderer/components/Test/radio2.vue';
-
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useStore } from 'vuex'
+import axios from 'axios'
 
-// 倒计时的总时长（15分钟）
-const totalSeconds = 1000
+const store = useStore()
+const userEmail = store.state.userEmail 
+const questions = ref<any[]>([])
+const currentQuestionIndex = ref(0)
+const selectedOption = ref<string>('')
+const abcd = ['A', 'B', 'C', 'D']
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost/api/get_test', {
+      params: {
+        userEmail: userEmail
+      }
+    })
+    const questionData = response.data.questions
+    questions.value = Object.keys(questionData).map(key => {
+      return {
+        content: questionData[key][0],
+        id: questionData[key][1],
+        correctOption: questionData[key][2],
+        options: questionData[key].slice(3)
+      }
+    })
+  } catch (error) {
+    console.error('Error fetching questions:', error)
+  }
+})
+
+// 计算百分制成绩
+const calculateGrade = () => {
+  let score = 0
+  questions.value.forEach((question, index) => {
+    if (question.correctOption === userAnswers[index]) {
+      score += 10
+    }
+  })
+  return score
+}
+
+const userAnswers = ref<string[]>(Array(10).fill(''))
+const handleNextClick = async () => {
+  if (selectedOption.value) {
+    userAnswers.value[currentQuestionIndex.value] = selectedOption.value
+    selectedOption.value = ''
+    if (currentQuestionIndex.value < 9) {
+      currentQuestionIndex.value++
+    } else {
+      try {
+        const grade = calculateGrade()
+        const response = await axios.post('http://localhost/api/save_test', {
+          userEmail: userEmail,
+          grade: grade
+        })
+        alert('提交成功')
+      } catch (error) {
+        alert('提交失败')
+      }
+    }
+  }
+}
+
+// 倒计时的总时长（15分钟)
+const totalSeconds = 900
 const remainingSeconds = ref(totalSeconds)
 // 初始化倒计时进度为100%
 const percentage = ref(100)
@@ -21,13 +80,13 @@ const getColor = (percentage) => {
     { color: '#6f7ad3', percentage: 100 },
   ]
   // 现在按百分比升序排序
-  const sortedColors = colors.sort((a, b) => a.percentage - b.percentage);
+  const sortedColors = colors.sort((a, b) => a.percentage - b.percentage)
 
   // 查找第一个百分比值大于给定百分比的颜色
-  const matchingColorRate = sortedColors.find(crate => percentage < crate.percentage);
+  const matchingColorRate = sortedColors.find(crate => percentage < crate.percentage)
 
   // 返回匹配颜色或默认颜色
-  return (matchingColorRate ? matchingColorRate.color : '#20a0ff');
+  return (matchingColorRate ? matchingColorRate.color : '#20a0ff')
 }
 
 const progressColor = ref(getColor(100))
@@ -61,8 +120,6 @@ onUnmounted(() => {
 })
 </script>
 
-
-
 <template>
   <div id="app" class="app-container">
     <div class="timer-wrapper">
@@ -71,14 +128,25 @@ onUnmounted(() => {
       </div>
       <div class="time_text"><span>{{ timeText }}</span></div>
     </div>
-    <div class="content-section">
+    <div class="content-section" v-if="questions.length">
       <h1 class="test-title">测试</h1>
       <div class="question-section">
-          <h2 class="question-type">单选题</h2>
-          <radio/>
+        <h2 class="question-type">单选题</h2>
+        <div>
+          <div class="question-section">
+            <el-text class="question-text">{{ currentQuestionIndex + 1 }}. {{ questions[currentQuestionIndex].content }}</el-text>
+          </div>
+          <div class="options-container">
+            <div class="check_container" v-for="(option, index) in questions[currentQuestionIndex].options" :key="index">
+              <input :id="'radio-' + index" class="hidden" type="radio" :name="'option'" :value="option" v-model="selectedOption">
+              <label class="checkbox" :for="'radio-' + index"></label>
+              <el-text class="radio-label">{{ abcd[index] }}. {{ option }}</el-text>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <el-button class="submit-button">提交</el-button>
+    <el-button class="submit-button" @click="handleNextClick">{{ currentQuestionIndex < 9 ? '下一题' : '提交' }}</el-button>
   </div>
 </template>
 
@@ -163,5 +231,79 @@ onUnmounted(() => {
 .submit-button:active {
   transform: translateY(2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.question-section {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.question-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.options-container {
+    width: 100%;
+}
+
+.check_container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.check_container:hover {
+    background-color: #e0e7ff;
+}
+
+.check_container:last-child {
+    margin-bottom: 0; /* Remove bottom margin for the last item */
+}
+
+.checkbox {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #212fab;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    transition: all 0.3s linear;
+    margin-right: 10px;
+    flex-shrink: 0; 
+}
+
+.checkbox::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    width: 6px;
+    height: 12px;
+    opacity: 0;
+    transform: rotate(45deg) scale(0);
+    border-right: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+    transition: all 0.3s linear;
+}
+
+.hidden {
+    display: none !important;
+}
+
+input[type="radio"]:checked + .checkbox::after {
+    opacity: 1 !important;
+    transform: rotate(45deg) scale(1) !important;
+}
+
+input[type="radio"]:checked + .checkbox {
+    background: #212fab;
+    border: none;
 }
 </style>
