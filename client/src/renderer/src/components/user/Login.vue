@@ -73,12 +73,12 @@ const handleSubmit = async (event: Event) => {
       store.dispatch('login');
       
       // 处理登陆成功后的逻辑，页面跳转
-      router.push('/home');
+      router.push('/');
     } else {
       ElMessage.error(response.data.message);
     }
   } catch (error) {
-    router.push('/home');
+    router.push('/');
     ElMessage.error('登录失败，请重试');
   }
 };

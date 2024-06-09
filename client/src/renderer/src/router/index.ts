@@ -10,9 +10,6 @@ import Learn from '@renderer/components/views/Learn.vue'
 import MissionIni from '@renderer/components/views/Mission_ini.vue'
 import Personal from '@renderer/components/views/Personal.vue'
 import Test from '@renderer/components/views/Test.vue'
-import Footer from '@renderer/layout/Footer.vue'
-import Header from '@renderer/layout/Header.vue'
-import Layout from '@renderer/layout/Layout.vue'
 import Home from '@renderer/layout/Home.vue'
 
 // Define routes
@@ -22,14 +19,14 @@ const routes = [
   { path: '/radio', component: radio},
   { path: '/radio1', component: radio1},
   { path: '/radio2', component: radio2},
-  { path: '/learn', component: Learn},
-  { path: '/missionini', component: MissionIni},
-  { path: '/personal', component: Personal},
-  { path: '/test', component: Test},
-  { path: '/layout', component: Layout},
-  { path: '/footer', component: Footer},
-  { path: '/header', component: Header},
-  { path: '/home', component: Home}
+  { path: '/',  
+    children:[
+      { path: '', component:Home},
+      { path: 'learn', component: Learn},
+      { path: 'missionini', component: MissionIni},
+      { path: 'personal', component: Personal},
+      { path: 'test', component: Test},
+    ]}
 ]
 
 // Create router instance
