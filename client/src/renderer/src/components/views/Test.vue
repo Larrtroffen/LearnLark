@@ -17,15 +17,18 @@ onMounted(async () => {
         userEmail: userEmail
       }
     })
-    const questionData = response.data.questions
-    questions.value = Object.keys(questionData).map(key => {
-      return {
-        content: questionData[key][0],
-        id: questionData[key][1],
-        correctOption: questionData[key][2],
-        options: questionData[key].slice(3)
-      }
-    })
+    const questionData = response.data
+    questions.value = questionData.map((item, index) => ({
+      content: item.content,
+      number: item.number,
+      correctOption: item.correct_answer,
+      options: [
+        item.selections_A,
+        item.selections_B,
+        item.selections_C,
+        item.selections_D
+      ]
+    }))
   } catch (error) {
     console.error('Error fetching questions:', error)
   }
@@ -35,8 +38,8 @@ onMounted(async () => {
 const calculateGrade = () => {
   let score = 0
   questions.value.forEach((question, index) => {
-    if (question.correctOption === userAnswers[index]) {
-      score += 10
+    if (question.correctOption === userAnswers.value[index]) {
+      score += 10 // assumed each question carries equal marks out of 100
     }
   })
   return score
@@ -52,7 +55,7 @@ const handleNextClick = async () => {
     } else {
       try {
         const grade = calculateGrade()
-        const response = await axios.post('http://localhost/api/save_test', {
+        await axios.post('http://localhost/api/save_test', {
           userEmail: userEmail,
           grade: grade
         })
@@ -64,10 +67,10 @@ const handleNextClick = async () => {
   }
 }
 
-// 倒计时的总时长（15分钟)
+// 倒计时的总时长（15分钟）
 const totalSeconds = 900
 const remainingSeconds = ref(totalSeconds)
-// 初始化倒计时进度为100%
+// 初始化倒计时进度为 100%
 const percentage = ref(100)
 
 // 根据当前百分比确定进度条颜色
@@ -79,13 +82,8 @@ const getColor = (percentage) => {
     { color: '#1989fa', percentage: 80 },
     { color: '#6f7ad3', percentage: 100 },
   ]
-  // 现在按百分比升序排序
   const sortedColors = colors.sort((a, b) => a.percentage - b.percentage)
-
-  // 查找第一个百分比值大于给定百分比的颜色
   const matchingColorRate = sortedColors.find(crate => percentage < crate.percentage)
-
-  // 返回匹配颜色或默认颜色
   return (matchingColorRate ? matchingColorRate.color : '#20a0ff')
 }
 

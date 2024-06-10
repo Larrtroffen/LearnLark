@@ -69,7 +69,7 @@ const currentViewMap = {
                     <div class="tooltip">Wechat</div>
                 </li>
                 <li class="icon-content">
-                    <a href="https://www.github.com/" aria-label="GitHub" data-social="github">
+                    <a href="https://github.com/Larrtroffen/LearnLark" aria-label="GitHub" data-social="github">
                         <div class="filled"></div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-github" viewBox="0 0 16 16" xml:space="preserve">

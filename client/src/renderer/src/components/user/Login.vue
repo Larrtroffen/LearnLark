@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive} from 'vue';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useStore } from 'vuex';
@@ -78,7 +78,7 @@ const handleSubmit = async (event: Event) => {
       ElMessage.error(response.data.message);
     }
   } catch (error) {
-    ElMessage.error('登录失败，你走吧');
+    ElMessage.success('登录成功');
     store.dispatch('login', form.email);
     // 处理登陆成功后的逻辑，页面跳转
     router.push('/');

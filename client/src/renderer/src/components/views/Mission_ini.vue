@@ -69,7 +69,7 @@ const fetchQuestionTypes = async () => {
   try {
     const response = await axios.get('/localhost/api/question_type');
     if (response.data) {
-      questionTypes.value = response.data.map((type: any) => ({
+      questionTypes.value = response.data.map((type: { name: string, id: string }) => ({
         label: type.name,
         value: type.id
       }));
