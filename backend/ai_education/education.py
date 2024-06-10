@@ -27,6 +27,38 @@ class LearnLark(object):
     def __init__(self):
         self.llm = Utils.LLM
 
+    def generate_first_question(
+            self,
+            knowledge:str
+    ):
+        """
+        根据知识点生成第一题
+        :param knowledge:知识点
+        :return: 第一题 + 答案 + 解析
+        结构为{'question':  ,'answer':  ,'analysis':  }
+        """
+
+        name = ["question", "answer", "analysis"]
+        description = ["所需要生成的与知识点有关的题目",
+                       "题目的答案，简短直接",
+                       "题目的解析，较为详细，一步步解决问题"]
+        out_parsers = Utils.create_out_parsers(name, description)
+
+        input_variables = ['knowledge_point']
+
+        instruction = "本次我学习的是以下知识点：{knowledge_point}，请为我生成一道与该知识点相关的题目与解析，请用中文回答我"
+
+        prompt = Utils.create_prompt(template_string=instruction,
+                                     input_variables=input_variables,
+                                     out_parser=out_parsers,
+                                     is_output_format=True,
+                                     knowledge_point=knowledge
+                                     )
+
+        output = self.llm(prompt)
+
+        return out_parsers.parse(output)
+
     def generate_next_question(
             self,
             question:str,
