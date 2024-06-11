@@ -2,7 +2,7 @@
   <div class="container">
     <div class="profile-section">
       <div class="avatar">
-        <img src="../pics/tem.jpg" alt="Avatar" />
+        <img src="../pics/tem.png" alt="Avatar" />
       </div>
       <div class="profile-info">
         <div class="name-section">
