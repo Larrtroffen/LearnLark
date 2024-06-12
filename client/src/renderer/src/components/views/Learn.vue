@@ -15,7 +15,7 @@
             <div class="check_container" v-for="(option, index) in options" :key="index">
               <input :id="'radio-' + index" class="hidden" type="radio" :name="'option'" :value="abcd[index]" v-model="selectedOption">
               <label class="checkbox" :for="'radio-' + index"></label>
-              <el-text class="radio-label">{{ abcd[index] }}. {{ option }}</el-text>
+              <el-text class="radio-label">{{ option }}</el-text>
             </div>
           </div>
         </div>
@@ -62,11 +62,13 @@ const question = ref({
   selections_D: '',
   correct_answer: ''
 });
+const previousContent = ref<string>('');
 
 const fetchQuestion = async (isCorrect: boolean, isFirst: boolean) => {
   const params = {
     is_correct: isCorrect,
     is_first: isFirst,
+    previous_content: isFirst ? '' : question.value.content,
     userEmail: userEmail
   };
   const response = await axios.post('/localhost/api/get_question', params);
