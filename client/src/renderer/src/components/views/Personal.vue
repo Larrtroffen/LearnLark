@@ -60,7 +60,7 @@ const editing = ref(false);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost/api/get_profile', {
+    const response = await axios.get('http://127.0.0.1:8000/api/get_profile', {
       params: { userEmail: store.state.userEmail }
     });
     const { record, name: userName } = response.data;
@@ -78,7 +78,7 @@ const editProfile = () => {
 
 const saveProfile = async () => {
   try {
-    await axios.post('http://localhost/api/profile_change', {
+    await axios.post('http://127.0.0.1:8000/api/profile_change', {
       userEmail: store.state.userEmail,
       name: name.value
     });

@@ -72,7 +72,7 @@ const calculateStudyDays = () => {
 
 const fetchQuestionTypes = async () => {
   try {
-    const response = await axios.get('/localhost/api/question_type');
+    const response = await axios.get('http://127.0.0.1:8000/api/question_type');
     if (response.data) {
       questionTypes.value = response.data.map((type: { name: string, id: string }) => ({
         label: type.name,
@@ -94,7 +94,7 @@ const saveTask = async () => {
   };
 
   try {
-    await axios.post('/localhost/api/mission_save', payload);
+    await axios.post('http://127.0.0.1:8000/api/mission_save', payload);
     alert('保存成功');
   } catch (error) {
     alert('保存失败');

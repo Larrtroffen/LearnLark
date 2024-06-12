@@ -61,7 +61,7 @@ const handleSubmit = async (event: Event) => {
   }
 
   try {
-    const response = await axios.post('http://localhost/api/login', {
+    const response = await axios.post('http://127.0.0.1:8000/api/login', {
       email: form.email,
       password: form.password
     });

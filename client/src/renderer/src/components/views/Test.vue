@@ -8,11 +8,11 @@ const userEmail = store.state.userEmail
 const questions = ref<any[]>([])
 const currentQuestionIndex = ref(0)
 const selectedOption = ref<string>('')
-const abcd = ['A', 'B', 'C', 'D']
+const abcd = ['', '', '', '']
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost/api/get_test', {
+    const response = await axios.get('http://127.0.0.1:8000/api/get_test', {
       params: {
         userEmail: userEmail
       }
@@ -55,7 +55,7 @@ const handleNextClick = async () => {
     } else {
       try {
         const grade = calculateGrade()
-        await axios.post('http://localhost/api/save_test', {
+        await axios.post('http://127.0.0.1:8000/api/save_test', {
           userEmail: userEmail,
           grade: grade
         })
@@ -138,7 +138,7 @@ onUnmounted(() => {
             <div class="check_container" v-for="(option, index) in questions[currentQuestionIndex].options" :key="index">
               <input :id="'radio-' + index" class="hidden" type="radio" :name="'option'" :value="option" v-model="selectedOption">
               <label class="checkbox" :for="'radio-' + index"></label>
-              <el-text class="radio-label">{{ abcd[index] }}. {{ option }}</el-text>
+              <el-text class="radio-label">{{ abcd[index] }} {{ option }}</el-text>
             </div>
           </div>
         </div>

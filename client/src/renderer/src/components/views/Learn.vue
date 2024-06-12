@@ -91,7 +91,7 @@ const submit = async () => {
   if (correctCount.value >= 3) {
     isCompleted.value = true;
     try {
-      const endResponse = await axios.post('/localhost/api/get_quesion_end', {
+      const endResponse = await axios.post('http://127.0.0.1:8000/api/get_quesion_end', {
         number: serial.value.toString(),
         userEmail: userEmail
       });
