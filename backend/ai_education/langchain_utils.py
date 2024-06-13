@@ -27,7 +27,7 @@ warnings.filterwarnings("ignore")
 import os
 # CloseAI by XinYiLea
 os.environ["OPENAI_API_BASE"] = 'https://api.openai-proxy.org/v1'
-os.environ["OPENAI_API_KEY"] = 'sk-AMNe3weytZcweN2e4v1vPcNpjxXEGO1tN45dzgRzq013SARq'
+os.environ["OPENAI_API_KEY"] = ''
 
 import langchain
 import langchain_core
