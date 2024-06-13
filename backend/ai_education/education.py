@@ -34,8 +34,8 @@ class LearnLark(object):
         """
         根据知识点生成第一题
         :param knowledge:知识点
-        :return: 第一题 + 答案 + 解析
-        结构为{'question':  ,'answer':  ,'analysis':  }
+        :return: 第一题 + 答案
+        结构为{'question':  ,'answer':  , }
         """
 
         name = ["question", "answer"]
@@ -70,7 +70,7 @@ class LearnLark(object):
         :param question:题目
         :param knowledge_point: 知识点
         :param is_correct: 题目回答情况
-        :return: 更简单/难的题 + 答案 + 解析
+        :return: 更简单/难的题 + 答案
         结构为{'question':  ,'answer':  ,}
         """
 
