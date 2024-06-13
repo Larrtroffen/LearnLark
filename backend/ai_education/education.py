@@ -21,7 +21,7 @@ chain
 from langchain.chains.llm import LLMChain
 from langchain_core.prompts import PromptTemplate
 
-from langchain_utils import Utils
+from ai_education.langchain_utils import Utils
 
 class LearnLark(object):
     def __init__(self):
@@ -38,15 +38,15 @@ class LearnLark(object):
         结构为{'question':  ,'answer':  ,'analysis':  }
         """
 
-        name = ["question", "answer", "analysis"]
-        description = ["所需要生成的与知识点有关的题目",
-                       "题目的答案，简短直接",
-                       "题目的解析，较为详细，一步步解决问题"]
+        name = ["question", "answer"]
+        description = ["题目和选项",
+                       "题目的答案，简短直接"]
         out_parsers = Utils.create_out_parsers(name, description)
 
         input_variables = ['knowledge_point']
 
-        instruction = "本次我学习的是以下知识点：{knowledge_point}，请为我生成一道与该知识点相关的题目与解析，请用中文回答我"
+        instruction = """本次我学习的是以下知识点：{knowledge_point}，请为我生成一道与该知识点相关的题目，题目要求选择题，需要有4个选项。请你
+                    用中文生成问题与答案。例如{{'第1题': '已知sinθ=3/5，求cosθ的值。\nA. 2/5\nB. 4/5\nC. 1/5\nD. 3/5\n答案: A'}}。请你一定要生成选项"""
 
         prompt = Utils.create_prompt(template_string=instruction,
                                      input_variables=input_variables,
@@ -71,22 +71,23 @@ class LearnLark(object):
         :param knowledge_point: 知识点
         :param is_correct: 题目回答情况
         :return: 更简单/难的题 + 答案 + 解析
-        结构为{'question':  ,'answer':  ,'analysis':  }
+        结构为{'question':  ,'answer':  ,}
         """
 
-        name = ["question", "answer", "analysis"]
-        description = ["所需要生成的与知识点有关的题目",
-                       "题目的答案，简短直接",
-                       "题目的解析，较为详细，一步步解决问题"]
+        name = ["question", "answer"]
+        description = ["题目和选项",
+                       "题目的答案，简短直接"]
         out_parsers = Utils.create_out_parsers(name, description)
 
         input_variables = ['knowledge_point','question']
 
         instruction = "本次我学习的是以下知识点：{knowledge_point}，我已经答了这道题：{question}，"
         if is_correct:
-            instruction = instruction + "并且答对了，请为我生成一道与该知识点相关，并且更难的题目与解析"
+            instruction = instruction + """并且答对了，请为我生成一道与该知识点相关，并且更难的题目，生成题目与答案。题目要求选择题，需要有4个选项。请你
+                                用中文生成问题与答案。例如{{'第1题': '已知sinθ=3/5，求cosθ的值。\nA. 2/5\nB. 4/5\nC. 1/5\nD. 3/5\n答案: A'}}。请你一定要生成选项"""
         else:
-            instruction = instruction + "并且答错了，请为我生成一道与该知识点相关，难度与原题目类似的题目与解析"
+            instruction = instruction + """并且答错了，请为我生成一道与该知识点相关，难度与原题目类似的题目，题目要求选择题，需要有4个选项。请你
+                                用中文生成问题与答案。例如例如{{'第1题': '已知sinθ=3/5，求cosθ的值。\nA. 2/5\nB. 4/5\nC. 1/5\nD. 3/5\n答案: A'}}。请你一定要生成选项"""
 
         prompt = Utils.create_prompt(template_string=instruction,
                                      input_variables=input_variables,
@@ -207,14 +208,12 @@ class LearnLark(object):
 if __name__ == "__main__":
 
     print(LearnLark().generate_next_question("已知双曲函数sinh(x) = (e^x - e^-x)/2，"
-                                              "求cosh(x)的导函数","圆锥曲线",True))
-    print("--------------------------------------------------")
-  
+                                             "求cosh(x)的导函数","圆锥曲线",True))
+    # print("--------------------------------------------------")
+    print(LearnLark().generate_first_question("圆锥曲线"))
+    # print("--------------------------------------------------")
     # print(LearnLark().study_knowledge("三角函数"))
     # print("--------------------------------------------------")
-  
     # print(LearnLark().test_knowledge({"三角函数":[3,5],"圆锥曲线":[4,10]}))
     # print("--------------------------------------------------")
-  
     # print(LearnLark().generate_schedule("我想背完3500词",40))
-    #pass
