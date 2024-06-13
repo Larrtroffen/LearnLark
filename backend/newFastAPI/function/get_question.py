@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from education import LearnLark
@@ -17,7 +17,34 @@ class Get_Qestion(BaseModel):
 # 创建 LearnLark 实例
 learn_lark = LearnLark()
 
-# 获取测试题目端点
+def parse_result(result: dict) -> dict:
+    question = result.get('question', '')
+    answer = result.get('answer', '')
+
+    lines = question.split('\n')
+    if len(lines) < 5:
+        raise HTTPException(status_code=500, detail="Question data is not correctly formatted")
+
+    content = lines[0]
+    selections = lines[1:5]
+    
+    # Assuming answer is just one character like 'C' or 'D'
+    correct_answer = answer
+
+    if len(selections) < 4:
+        raise HTTPException(status_code=500, detail="Selections data is not correctly formatted")
+
+    structured_response = {
+        "content": content,
+        "selections_A": selections[0][3:],  # Remove the 'A. ' prefix
+        "selections_B": selections[1][3:],  # Remove the 'B. ' prefix
+        "selections_C": selections[2][3:],  # Remove the 'C. ' prefix
+        "selections_D": selections[3][3:],  # Remove the 'D. ' prefix
+        "correct_answer": correct_answer
+    }
+
+    return structured_response
+
 @get_question.post("/get_question")
 async def get_question_items(user_question: Get_Qestion):
 
@@ -32,14 +59,4 @@ async def get_question_items(user_question: Get_Qestion):
             is_correct=user_question.is_correct
         )
 
-    # 解析LLM返回的结果，并将其转换为前端需要的结构化格式
-    structured_response = {
-        "content": result['question'],
-        "selections_A": result['answer'].split('\n')[0],
-        "selections_B": result['answer'].split('\n')[1],
-        "selections_C": result['answer'].split('\n')[2],
-        "selections_D": result['answer'].split('\n')[3],
-        "correct_answer": result['answer'].split('\n')[4].split(': ')[1]  # 假设答案格式如 "答案: A"
-    }
-
-    return structured_response
+    return parse_result(result)

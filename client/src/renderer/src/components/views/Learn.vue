@@ -71,12 +71,29 @@ const fetchQuestion = async (isCorrect: boolean, isFirst: boolean) => {
     knowledge_point: '三角函数', // 
     question: isFirst ? '' : question.value.content
   };
-  const response = await axios.post('http://127.0.0.1:8000/api/get_question', params);
-  const data = response.data;
-  question.value.content = data.content;
-  options.value = [data.selections_A, data.selections_B, data.selections_C, data.selections_D];
-  question.value.correct_answer = data.correct_answer;
-  selectedOption.value = '';
+
+  let attemptCount = 0;
+  const maxAttempts = 5;
+
+  while (attemptCount < maxAttempts) {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/get_question', params);
+      const data = response.data;
+      question.value.content = data.content;
+      options.value = [data.selections_A, data.selections_B, data.selections_C, data.selections_D];
+      question.value.correct_answer = data.correct_answer;
+      selectedOption.value = '';
+      break;  // 成功就跳出循环
+    } catch (error) {
+      attemptCount++;
+      if (attemptCount >= maxAttempts) {
+        console.error('Failed to fetch question after multiple attempts', error);
+      } else {
+        console.log(`Attempt ${attemptCount} failed, retrying...`);
+        await new Promise(resolve => setTimeout(resolve, 1000));  // 等待1秒再尝试
+      }
+    }
+  }
 };
 
 const submit = async () => {
@@ -107,6 +124,12 @@ const submit = async () => {
   } else {
     serial.value++;
     number.value = `问题 ${serial.value}`;
+
+    // 清空当前题目
+    question.value.content = '';
+    options.value = ['', '', '', ''];
+    selectedOption.value = '';
+
     await fetchQuestion(isCorrect, false);
   }
 };
