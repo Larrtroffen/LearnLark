@@ -7,6 +7,15 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Larrtroffen/LearnLark)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Larrtroffen/LearnLark)
 
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Electron.js](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+
+
 
 ## 仓库活动情况
 ![Alt](https://repobeats.axiom.co/api/embed/a751cb753b393acf3cd58b271743bcb638687952.svg "Repobeats analytics image")
