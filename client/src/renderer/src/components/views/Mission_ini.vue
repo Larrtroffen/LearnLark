@@ -58,14 +58,21 @@ const selectedQuestionType = ref('');
 const questionTypes = ref<Array<{ label: string, value: string }>>([]);
 
 const calculateStudyDays = () => {
-  if (studyDateRange.value && studyDateRange.value.length === 2) {
+  if (studyDateRange.value && Array.isArray(studyDateRange.value) && studyDateRange.value.length === 2) {
     const [start, end] = studyDateRange.value;
+    // Ensure both start and end are valid date strings
     const startDate = new Date(start);
     const endDate = new Date(end);
-    const differenceInTime = endDate.getTime() - startDate.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-    studyDays.value = differenceInDays + 1; // Include the start day
+    if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+      const differenceInTime = endDate.getTime() - startDate.getTime();
+      const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+      studyDays.value = differenceInDays + 1; // Include the start day
+    } else {
+      console.error("Invalid date format");
+      studyDays.value = null;
+    }
   } else {
+    console.error("Invalid date range.");
     studyDays.value = null;
   }
 };

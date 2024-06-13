@@ -46,7 +46,6 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 const userEmail = store.state.userEmail;
-const knowledgePoint = store.state.knowledgePoint; // 获取知识点
 
 const number = ref('问题 1');
 const serial = ref(1);
@@ -63,7 +62,6 @@ const question = ref({
   selections_D: '',
   correct_answer: ''
 });
-const previousContent = ref<string>('');
 
 const fetchQuestion = async (isCorrect: boolean, isFirst: boolean) => {
   const params = {

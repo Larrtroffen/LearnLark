@@ -12,7 +12,9 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: client
+  target:
+    - target: nsis
+      arch: x64
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
