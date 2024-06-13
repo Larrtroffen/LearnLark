@@ -10,5 +10,4 @@ class Question_end(BaseModel):
 
 @get_quesion_end.post("/get_quesion_end")
 async def get_quesion_result(end: Question_end):
-
-    return True
+    return {"status": "success"}

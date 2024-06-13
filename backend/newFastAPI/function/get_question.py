@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
-from LearnLark.education import LearnLark
+from education import LearnLark
 
 # 创建子路由对象
 get_question = APIRouter()
@@ -20,7 +20,7 @@ learn_lark = LearnLark()
 
 
 # 获取测试题目端点
-@get_question.get("/get_question")
+@get_question.post("/get_question")
 async def get_question_items(user_question: Get_Qestion):
 
     if user_question.is_first:

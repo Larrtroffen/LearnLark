@@ -6,7 +6,7 @@ get_profile = APIRouter()
 
 # 用户数据存储字典
 users_db = {
-    "1234567@qq.com": {
+    "1": {
         "record": {
             "complete": ["task1", "task2"],
             "incomplete": ["task3"]
@@ -46,22 +46,12 @@ class UserInfoResponse(BaseModel):
     name: str
 
 # 获取用户信息端点
-@get_profile.get("/get_user_info", response_model=UserInfoResponse)
+@get_profile.get("/get_profile", response_model=UserInfoResponse)
 async def get_user_info(userEmail: str = Query(...)):
     if userEmail not in users_db:
         raise HTTPException(status_code=404, detail="User not found")
 
     user_info = users_db[userEmail]
     return user_info
-
-# 定义示例用户信息获取类
-class UserInformation:
-    def __init__(self, user_email):
-        self.user_email = user_email
-
-    def get_user_information(self):
-        if self.user_email not in users_db:
-            raise ValueError("User not found")
-        return users_db[self.user_email]
 
 

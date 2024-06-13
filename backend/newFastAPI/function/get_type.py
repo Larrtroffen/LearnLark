@@ -4,7 +4,7 @@ get_type = APIRouter()
 
 type_data = [
     {
-        "name": "数学",
+        "name": "三角函数",
         "id": "1"
     },
     {

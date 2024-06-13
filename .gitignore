@@ -4,3 +4,4 @@ client/dist
 client/out
 .DS_Store
 *.log*
+*__pycache__*

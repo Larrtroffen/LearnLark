@@ -13,9 +13,25 @@ from function.get_profile import get_profile
 from function.get_test import get_test
 from function.profile_change import profile_change
 from function.save_test import save_test_router
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+# 设置允许跨域的源地址
+origins = [
+    "http://localhost:5173",  # Vue应用的地址
+]
+
+# 配置CORS中间件
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # 允许来自这些源地址的请求
+    allow_credentials=True,
+    allow_methods=["*"],  # 允许所有HTTP方法
+    allow_headers=["*"],  # 允许所有HTTP头
+)
+
 
 # 包含用户路由
 app.include_router(login, prefix="/api", tags=["LearnLark登录"])

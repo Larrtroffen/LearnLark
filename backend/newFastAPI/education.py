@@ -18,6 +18,9 @@ chain
 3.调用数据库分析用户数据————根据用户的请求制定任务（根据一些理论，比如艾宾浩斯）
 4.学习记录————与我无关
 """
+import sys
+sys.path.append("..")
+
 from langchain.chains.llm import LLMChain
 from langchain_core.prompts import PromptTemplate
 

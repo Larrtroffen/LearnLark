@@ -62,7 +62,7 @@ const handleSubmit = async (event: Event) => {
 
   try {
     const response = await axios.post('http://127.0.0.1:8000/api/login', {
-      email: form.email,
+      userEmail: form.email,
       password: form.password
     });
 
@@ -78,10 +78,7 @@ const handleSubmit = async (event: Event) => {
       ElMessage.error(response.data.message);
     }
   } catch (error) {
-    ElMessage.success('登录成功');
-    store.dispatch('login', form.email);
-    // 处理登陆成功后的逻辑，页面跳转
-    router.push('/');
+    ElMessage.success('登录失败');
   }
 };
 </script>

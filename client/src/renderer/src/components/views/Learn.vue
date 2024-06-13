@@ -46,6 +46,7 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 const userEmail = store.state.userEmail;
+const knowledgePoint = store.state.knowledgePoint; // 获取知识点
 
 const number = ref('问题 1');
 const serial = ref(1);
@@ -66,12 +67,13 @@ const previousContent = ref<string>('');
 
 const fetchQuestion = async (isCorrect: boolean, isFirst: boolean) => {
   const params = {
+    userEmail: userEmail,
     is_correct: isCorrect,
     is_first: isFirst,
-    previous_content: isFirst ? '' : question.value.content,
-    userEmail: userEmail
+    knowledge_point: '三角函数', // 
+    question: isFirst ? '' : question.value.content
   };
-  const response = await axios.post('/localhost/api/get_question', params);
+  const response = await axios.post('http://127.0.0.1:8000/api/get_question', params);
   const data = response.data;
   question.value.content = data.content;
   options.value = [data.selections_A, data.selections_B, data.selections_C, data.selections_D];

@@ -32,9 +32,9 @@ users_info = {
 }
 
 
-@login.get("/login")
+@login.post("/login")
 async def user_login(user: User):
     for user_info in users_info.values():
         if user_info["userEmail"] == user.userEmail and user_info["password"] == user.password:
-            return True
-    return False
+            return {"success": True, "message": "登录成功"}  
+    return {"success": False, "message": "用户名或密码错误"}  

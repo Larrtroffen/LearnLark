@@ -1,4 +1,4 @@
-from ai_education.langchain_utils import Utils
+from langchain_utils import Utils
 
 import warnings
 warnings.filterwarnings("ignore")

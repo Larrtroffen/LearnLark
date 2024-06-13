@@ -4,29 +4,31 @@ import { useStore } from 'vuex'
 import axios from 'axios'
 
 const store = useStore()
-const userEmail = store.state.userEmail 
+const userEmail = ref(store.state.userEmail) // 使用 ref 包装 userEmail
 const questions = ref<any[]>([])
 const currentQuestionIndex = ref(0)
 const selectedOption = ref<string>('')
-const abcd = ['', '', '', '']
 
+// 根据问题number字段存储用户的答案
+const userAnswers = ref<{ [key: number]: string }>({})
+
+// 页面加载时从后端获取测试题目
 onMounted(async () => {
   try {
     const response = await axios.get('http://127.0.0.1:8000/api/get_test', {
       params: {
-        userEmail: userEmail
+        userEmail: userEmail.value // 使用 .value 从 ref 中获取值
       }
     })
-    const questionData = response.data
-    questions.value = questionData.map((item, index) => ({
+    questions.value = response.data.map((item) => ({
       content: item.content,
-      number: item.number,
+      number: item.number, // 直接使用后端返回的number字段
       correctOption: item.correct_answer,
       options: [
-        item.selections_A,
-        item.selections_B,
-        item.selections_C,
-        item.selections_D
+        { label: 'A', text: item.selections_A },
+        { label: 'B', text: item.selections_B },
+        { label: 'C', text: item.selections_C },
+        { label: 'D', text: item.selections_D }
       ]
     }))
   } catch (error) {
@@ -37,35 +39,40 @@ onMounted(async () => {
 // 计算百分制成绩
 const calculateGrade = () => {
   let score = 0
-  questions.value.forEach((question, index) => {
-    if (question.correctOption === userAnswers.value[index]) {
-      score += 10 // assumed each question carries equal marks out of 100
+  questions.value.forEach((question) => {
+    if (userAnswers.value[question.number] === question.correctOption) {
+      score += 10 // 每题10分，满分为100分（10题）
     }
   })
   return score
 }
 
-const userAnswers = ref<string[]>(Array(10).fill(''))
+// 提交答案
 const handleNextClick = async () => {
   if (selectedOption.value) {
-    userAnswers.value[currentQuestionIndex.value] = selectedOption.value
-    selectedOption.value = ''
-    if (currentQuestionIndex.value < 9) {
-      currentQuestionIndex.value++
+    // 提取选中选项的label并保存
+    const selectedLabel = questions.value[currentQuestionIndex.value].options.find(option => option.text === selectedOption.value).label;
+    userAnswers.value[questions.value[currentQuestionIndex.value].number] = selectedLabel;
+    selectedOption.value = '';
+
+    if (currentQuestionIndex.value < questions.value.length - 1) {
+      currentQuestionIndex.value++;
     } else {
       try {
-        const grade = calculateGrade()
-        await axios.post('http://127.0.0.1:8000/api/save_test', {
-          userEmail: userEmail,
-          grade: grade
-        })
-        alert('提交成功')
+        const grade = calculateGrade();
+        const response = await axios.post('http://127.0.0.1:8000/api/save_test', {
+          userEmail: userEmail.value,  // 使用 .value 从 ref 中获取值
+          grade: grade  // 确保 grade 是整数
+        });
+        alert(`提交成功。您的得分是：${response.data.grade}`);
       } catch (error) {
-        alert('提交失败')
+        alert('提交失败');
       }
     }
+  } else {
+    alert('请选择一个选项');
   }
-}
+};
 
 // 倒计时的总时长（15分钟）
 const totalSeconds = 900
@@ -83,8 +90,8 @@ const getColor = (percentage) => {
     { color: '#6f7ad3', percentage: 100 },
   ]
   const sortedColors = colors.sort((a, b) => a.percentage - b.percentage)
-  const matchingColorRate = sortedColors.find(crate => percentage < crate.percentage)
-  return (matchingColorRate ? matchingColorRate.color : '#20a0ff')
+  const matchingColorRate = sortedColors.find(crate => percentage.value < crate.percentage)
+  return matchingColorRate ? matchingColorRate.color : '#20a0ff'
 }
 
 const progressColor = ref(getColor(100))
@@ -136,17 +143,18 @@ onUnmounted(() => {
           </div>
           <div class="options-container">
             <div class="check_container" v-for="(option, index) in questions[currentQuestionIndex].options" :key="index">
-              <input :id="'radio-' + index" class="hidden" type="radio" :name="'option'" :value="option" v-model="selectedOption">
+              <input :id="'radio-' + index" class="hidden" type="radio" :name="'option'" :value="option.text" v-model="selectedOption">
               <label class="checkbox" :for="'radio-' + index"></label>
-              <el-text class="radio-label">{{ abcd[index] }} {{ option }}</el-text>
+              <el-text class="radio-label">{{ option.text }}</el-text>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <el-button class="submit-button" @click="handleNextClick">{{ currentQuestionIndex < 9 ? '下一题' : '提交' }}</el-button>
+    <el-button class="submit-button" @click="handleNextClick">{{ currentQuestionIndex < questions.values.length - 1 ? '下一题' : '提交' }}</el-button>
   </div>
 </template>
+
 
 <style>
 .app-container {

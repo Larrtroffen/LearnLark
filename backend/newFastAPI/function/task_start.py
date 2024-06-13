@@ -4,14 +4,13 @@ from pydantic import BaseModel
 task_start = APIRouter()
 
 class Task(BaseModel):
-    days: str
+    days: int
+    questionType: str
     startDate: str
     taskName: str
-    question_type: str
     userEmail: str
 
 
 @task_start.post("/mission_save")
 async def mission_save(task: Task):
-
-    return True
+    return {"success": True, "message": "设置成功"}  

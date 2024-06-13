@@ -21,7 +21,7 @@ chain
 from langchain.chains.llm import LLMChain
 from langchain_core.prompts import PromptTemplate
 
-from ai_education.langchain_utils import Utils
+from langchain_utils import Utils
 
 class LearnLark(object):
     def __init__(self):
@@ -206,9 +206,9 @@ class LearnLark(object):
 
 if __name__ == "__main__":
 
-    # print(LearnLark().generate_next_question("已知双曲函数sinh(x) = (e^x - e^-x)/2，"
-    #                                          "求cosh(x)的导函数","圆锥曲线",True))
-    # print("--------------------------------------------------")
+    print(LearnLark().generate_next_question("已知双曲函数sinh(x) = (e^x - e^-x)/2，"
+                                              "求cosh(x)的导函数","圆锥曲线",True))
+    print("--------------------------------------------------")
   
     # print(LearnLark().study_knowledge("三角函数"))
     # print("--------------------------------------------------")
@@ -217,4 +217,4 @@ if __name__ == "__main__":
     # print("--------------------------------------------------")
   
     # print(LearnLark().generate_schedule("我想背完3500词",40))
-    pass
+    #pass
