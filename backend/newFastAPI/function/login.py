@@ -25,10 +25,6 @@ users_info = {
         "userEmail": "1234567@gmail.com",
         "password": "password101"
     },
-    "user5": {
-        "userEmail": "user5@example.com",
-        "password": "password202"
-    }
 }
 
 
