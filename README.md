@@ -31,7 +31,7 @@ git clone https://github.com/Larrtroffen/LearnLark.git
 ``` 
 - 进入前端项目文件夹
 ```sh
-cd LearnLark\client
+cd client
 ```
 - 安装环境并启动开发
 ```sh
@@ -47,12 +47,17 @@ git clone https://github.com/Larrtroffen/LearnLark.git
 ``` 
 - 进入后端项目文件夹
 ```sh
-cd LearnLark\backend
+cd backend\newFastAPI
 ```
 - 安装依赖
 ```sh
 pip install -r requirments.txt
 ```
+- 运行后端服务
+```sh
+uvicorn main:app --reload
+```
+
 
 ## 环境要求
 - node 16.14.2
